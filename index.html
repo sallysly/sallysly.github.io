@@ -1,144 +1,337 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swiss Dance Challenge 2026</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Swiss Dance Challenge 2026</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#000;
-color:white;
-text-align:center;
-}
+  <style>
+    :root{
+      --bg:#07090b;
+      --panel:#0f1216;
+      --text:#e9eef3;
+      --muted:#b7c0cb;
+      --teal:#25e3d1;
+      --teal2:#17c7b7;
+      --stroke:rgba(255,255,255,.08);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius:18px;
+      --max: 980px;
+    }
 
-.hero{
-background:url('IMG_6543.png') center/cover no-repeat;
-position:relative;
-padding:160px 20px;
-}
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 50% -180px, rgba(37,227,209,.18), transparent 60%),
+                  radial-gradient(900px 550px at 20% 20%, rgba(37,227,209,.08), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      text-align:center;
+    }
 
-.hero::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.65);
-}
+    a{ color:var(--teal); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
 
-.hero-content{
-position:relative;
-z-index:2;
-}
+    .wrap{
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-.hero h1{
-font-size:60px;
-margin:0;
-color:#00e0d0;
-}
+    /* HERO comme Wix */
+    .hero{
+      position:relative;
+      min-height: 72vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 36px 0 26px;
+      overflow:hidden;
+    }
 
-.hero p{
-font-size:20px;
-max-width:800px;
-margin:20px auto;
-}
+    /* Affiche entière visible (pas coupée) */
+    .hero .poster{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+      background: #000;
+    }
 
-.section{
-padding:60px 20px;
-max-width:900px;
-margin:auto;
-}
+    .hero .poster img{
+      width: 100%;
+      height: 100%;
+      max-width: 1400px;
+      object-fit: contain;     /* IMPORTANT: affiche entière */
+      object-position: center;
+      filter: contrast(1.02) saturate(1.02);
+      opacity: .95;
+    }
 
-h2{
-color:#00e0d0;
-}
+    /* voile sombre pour lisibilité du texte */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to bottom,
+          rgba(0,0,0,.55) 0%,
+          rgba(0,0,0,.42) 25%,
+          rgba(0,0,0,.68) 70%,
+          rgba(0,0,0,.92) 100%);
+      pointer-events:none;
+    }
 
-form{
-background:#111;
-padding:30px;
-border-radius:10px;
-max-width:500px;
-margin:auto;
-}
+    .hero-content{
+      position:relative;
+      z-index:2;
+      width: min(820px, calc(100% - 32px));
+      padding: 18px 16px 10px;
+    }
 
-input, select{
-width:100%;
-padding:12px;
-margin:10px 0;
-border:none;
-border-radius:5px;
-}
+    .title{
+      margin:0;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      line-height: 1.02;
+      font-size: clamp(40px, 7vw, 74px);
+      color: var(--teal);
+      text-shadow: 0 10px 30px rgba(0,0,0,.65);
+    }
 
-button{
-background:#00e0d0;
-border:none;
-padding:15px;
-width:100%;
-font-size:18px;
-border-radius:5px;
-cursor:pointer;
-}
+    .subtitle{
+      margin: 14px auto 0;
+      max-width: 720px;
+      font-size: clamp(15px, 2.2vw, 18px);
+      color: rgba(255,255,255,.92);
+      line-height: 1.45;
+      text-shadow: 0 8px 24px rgba(0,0,0,.6);
+    }
 
-button:hover{
-background:#00bfae;
-}
-</style>
+    /* séparateur discret */
+    .divider{
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(37,227,209,.35), transparent);
+      margin: 26px auto 0;
+      max-width: 520px;
+    }
+
+    /* Sections */
+    .section{
+      padding: 56px 0 0;
+    }
+
+    .h2{
+      margin: 0 0 10px;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--teal);
+      letter-spacing:.02em;
+    }
+
+    .dates{
+      color: var(--muted);
+      font-size: 16px;
+      margin: 8px 0 0;
+    }
+
+    .dates .links{
+      display:inline-flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:10px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 8px 12px;
+      border: 1px solid rgba(37,227,209,.25);
+      border-radius: 999px;
+      color: var(--teal);
+      background: rgba(37,227,209,.06);
+      font-weight: 700;
+      font-size: 14px;
+      min-width: 54px;
+    }
+
+    /* Carte formulaire */
+    .card{
+      width: min(560px, calc(100% - 24px));
+      margin: 18px auto 0;
+      background: rgba(15,18,22,.88);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    form{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    input, select{
+      width:100%;
+      padding: 14px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-size: 15px;
+      outline:none;
+    }
+
+    input::placeholder{ color: rgba(233,238,243,.55); }
+
+    input:focus, select:focus{
+      border-color: rgba(37,227,209,.55);
+      box-shadow: 0 0 0 3px rgba(37,227,209,.12);
+    }
+
+    select option{ color:#000; }
+
+    button{
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 0;
+      background: linear-gradient(135deg, var(--teal), var(--teal2));
+      color:#001412;
+      font-weight: 900;
+      font-size: 16px;
+      cursor:pointer;
+      box-shadow: 0 16px 40px rgba(37,227,209,.18);
+    }
+    button:active{ transform: translateY(1px); }
+
+    .note{
+      margin-top:10px;
+      font-size: 12px;
+      color: rgba(183,192,203,.85);
+      line-height: 1.35;
+    }
+
+    /* Prize money */
+    .prize{
+      width: min(520px, calc(100% - 24px));
+      margin: 18px auto 60px;
+      padding: 18px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      background: rgba(15,18,22,.55);
+      box-shadow: var(--shadow);
+    }
+    .prize ul{
+      list-style:none;
+      padding:0;
+      margin: 10px 0 0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+      color: rgba(233,238,243,.92);
+      font-weight:700;
+    }
+
+    /* Mobile : hero plus compact */
+    @media (max-width: 520px){
+      .hero{ min-height: 66vh; padding-top: 26px; }
+      .hero .poster{ padding: 10px; }
+      .card{ padding: 16px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="hero">
-<div class="hero-content">
-<h1>SWISS DANCE CHALLENGE</h1>
-<p>
-Du 11 au 28 mars 2026 dans les Centres Manor.<br>
-Participation 100% gratuite – Accès libre pour le public.
-</p>
-</div>
-</div>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="poster">
+      <!-- IMPORTANT: mets ici le nom EXACT de ton image uploadée -->
+      <img src="IMG_6543.png" alt="Swiss Dance Challenge - Affiche" />
+    </div>
 
-<div class="section">
-<h2>Dates des présélections</h2>
-<p>13 – 14 – 20 – 21 – 27 mars 2026</p>
-</div>
+    <div class="hero-content">
+      <h1 class="title">SWISS<br/>DANCE<br/>CHALLENGE</h1>
+      <p class="subtitle">
+        Du 11 au 28 mars 2026 dans les Centres Manor.<br/>
+        Participation 100% gratuite - Accès libre pour le public.
+      </p>
+      <div class="divider"></div>
+    </div>
+  </header>
 
-<div class="section">
-<h2>Inscription Battle</h2>
+  <main class="wrap">
 
-<form action="https://formspree.io/f/yourformid" method="POST">
-<input type="text" name="prenom" placeholder="Prénom" required>
-<input type="text" name="nom" placeholder="Nom" required>
-<input type="email" name="email" placeholder="Email" required>
+    <!-- Dates -->
+    <section class="section">
+      <div class="h2">Dates des présélections</div>
+      <div class="dates">
+        mars 2026
+        <div class="links">
+          <span class="chip">13</span>
+          <span class="chip">14</span>
+          <span class="chip">20</span>
+          <span class="chip">21</span>
+          <span class="chip">27</span>
+        </div>
+      </div>
+    </section>
 
-<select name="categorie" required>
-<option value="">Choisir catégorie</option>
-<option>Battle KIDZ (-16 ans)</option>
-<option>Battle Adultes (17+)</option>
-</select>
+    <!-- Formulaire (inchangé sur le fond) -->
+    <section class="section">
+      <div class="h2">Inscription Battle</div>
 
-<select name="date" required>
-<option value="">Choisir une date</option>
-<option>13 mars 2026</option>
-<option>14 mars 2026</option>
-<option>20 mars 2026</option>
-<option>21 mars 2026</option>
-<option>27 mars 2026</option>
-</select>
+      <div class="card">
+        <form action="https://formspree.io/f/YOUR_ID" method="POST">
+          <input type="text" name="prenom" placeholder="Prénom" required />
+          <input type="text" name="nom" placeholder="Nom" required />
+          <input type="email" name="email" placeholder="Email" required />
 
-<button type="submit">S'inscrire</button>
-</form>
+          <select name="categorie" required>
+            <option value="" disabled selected>Choisir catégorie</option>
+            <option>Battle KIDZ (moins de 16 ans)</option>
+            <option>Battle Adultes (dès 17 ans)</option>
+          </select>
 
-</div>
+          <select name="date" required>
+            <option value="" disabled selected>Choisir une date</option>
+            <option>13 mars 2026</option>
+            <option>14 mars 2026</option>
+            <option>20 mars 2026</option>
+            <option>21 mars 2026</option>
+            <option>27 mars 2026</option>
+          </select>
 
-<div class="section">
-<h2>Prize Money</h2>
-<p>🥇 2 x CHF 150<br>
-🥈 6 x CHF 50</p>
-</div>
+          <button type="submit">S'inscrire</button>
+        </form>
+
+        <div class="note">
+          Les inscriptions sont ouvertes dès maintenant. Choisissez votre date de présélection. Participation 100% gratuite.
+        </div>
+      </div>
+    </section>
+
+    <!-- Prize Money -->
+    <section class="section">
+      <div class="h2">Prize Money</div>
+      <div class="prize">
+        <ul>
+          <li>🥇 2 x CHF 150.-</li>
+          <li>🥈 6 x CHF 50.-</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
 
 </body>
 </html>
