@@ -35,7 +35,7 @@
       padding: 28px 0 60px;
     }
 
-    /* HERO */
+    /* HERO (affiche entière visible) */
     .hero{
       background:#000;
       padding:18px 0 0;
@@ -52,6 +52,7 @@
       object-fit:contain;
     }
 
+    /* TITRE */
     .title{
       margin: 10px auto 0;
       font-weight:900;
@@ -61,8 +62,36 @@
       text-transform:uppercase;
     }
 
+    /* Badges */
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin: 14px 0 0;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+      font-weight:800;
+      color:#0f2b27;
+      font-size: 14px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--teal2);
+      display:inline-block;
+    }
+
+    /* SECTIONS */
     .section{
-      margin-top: 28px;
+      margin-top: 22px;
       padding: 22px;
       background: var(--card);
       border: 1px solid var(--line);
@@ -103,6 +132,19 @@
       line-height:1.55;
     }
 
+    /* ALERT SUCCESS */
+    .success{
+      display:none;
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid #cfeeea;
+      background:#ecfbf9;
+      color:#0b3b34;
+      font-weight:800;
+    }
+
+    /* FORM */
     .form-wrap{
       margin-top: 18px;
       padding: 18px;
@@ -139,7 +181,9 @@
       font-weight:900;
     }
 
-    button:hover{ background:var(--teal2); }
+    button:hover{
+      background:var(--teal2);
+    }
 
     .note{
       margin-top:10px;
@@ -149,21 +193,7 @@
       text-align:left;
     }
 
-    .success{
-      display:none;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 14px;
-      background:#eafffb;
-      border:1px solid #bff4ee;
-      color:#0a3b35;
-    }
-    .success h3{ margin:0 0 6px; }
-    .success p{ margin:0; color:#0a3b35; }
-
-    /* anti-spam honeypot (caché) */
-    .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
-
+    /* petit ajustement mobile */
     @media (max-width:520px){
       .section{ padding:16px; }
       ul{ margin-left: 18px; }
@@ -175,6 +205,7 @@
 
   <header class="hero">
     <div class="poster">
+      <!-- Ton fichier image dans le repo (garde exactement ce nom) -->
       <img src="IMG_6543.png" alt="Swiss Dance Challenge 2026" />
     </div>
   </header>
@@ -182,29 +213,25 @@
   <div class="wrap">
     <div class="title">Swiss Dance Challenge</div>
 
-    <section class="section" id="top">
+    <div class="badges" aria-label="Infos rapides">
+      <div class="badge"><span class="dot"></span> 11 au 28 mars 2026</div>
+      <div class="badge"><span class="dot"></span> Centres Manor</div>
+      <div class="badge"><span class="dot"></span> 100% gratuit</div>
+    </div>
+
+    <section class="section">
       <h2>Présentation</h2>
       <p>
-        Le Swiss Dance Challenge revient en 2026 avec une tournée spéciale dans les Centres Manor.
-        L’objectif : mettre en avant la culture urbaine, créer un moment de partage intergénérationnel,
-        et offrir une scène accessible à toutes et tous.
+        Le Swiss Dance Challenge revient en 2026 avec une tournée 100% urbaine dans les Centres Manor.
+        L’objectif est simple : rassembler la communauté, mettre en avant les talents, et faire vivre au public
+        une vraie expérience hip-hop, conviviale et accessible à tous.
       </p>
       <p>
-        Au programme : présélections, battles, DJ set, jury professionnel, ambiance et énergie.
-        Danseurs, danseuses, familles et public, tout le monde est le bienvenu.
+        Au programme : présélections, battles, DJ, jury professionnel et une ambiance de folie au cœur de vos centres.
+        Que tu sois danseur(se), parent, ami(e) ou simple curieux : tu es le bienvenu.
       </p>
       <p>
         Participation gratuite. Accès libre pour le public.
-      </p>
-
-      <div class="divider"></div>
-
-      <h2>Détails de l'événement</h2>
-      <p>
-        Le Swiss Dance Challenge est de retour dans les Centres Manor du 11 au 28 mars 2026 pour une tournée explosive dédiée à la culture urbaine.
-      </p>
-      <p>
-        Trois semaines de battles, de musique et d’énergie pure au cœur de vos centres Manor.
       </p>
 
       <div class="divider"></div>
@@ -255,25 +282,17 @@
 
       <div class="divider"></div>
 
-      <h2 id="inscription">Inscription Battle</h2>
+      <h2>Inscription Battle</h2>
 
-      <!-- Message de succès (affiché après redirection #merci) -->
-      <div class="success" id="merci">
-        <h3>Merci !</h3>
-        <p>Ton inscription a bien été envoyée. On se réjouit de te voir sur le dancefloor.</p>
+      <div class="success" id="successMsg">
+        ✅ Merci ! Ton inscription a bien été envoyée. On te recontacte si besoin.
       </div>
 
       <div class="form-wrap">
         <form action="https://formspree.io/f/xojnbbkr" method="POST">
-          <!-- Anti-spam -->
-          <div class="hp">
-            <label>Ne pas remplir ce champ</label>
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
-          </div>
-
           <!-- Options Formspree -->
           <input type="hidden" name="_subject" value="Nouvelle inscription - Swiss Dance Challenge 2026">
-          <input type="hidden" name="_redirect" value="http://espritducercle.ch/#merci">
+          <input type="hidden" name="_redirect" value="https://espritducercle.ch/?sent=1">
 
           <input type="text" name="prenom" placeholder="Prénom" required>
           <input type="text" name="nom" placeholder="Nom" required>
@@ -298,8 +317,8 @@
         </form>
 
         <div class="note">
-          Participation 100% gratuite. Choisis ta date de présélection et ta catégorie.<br>
-          Après l’envoi, tu verras “Merci !” sur cette page, et toi tu reçois aussi l’email Formspree (comme tu viens de voir).
+          Participation 100% gratuite. Choisis ta date de présélection et ta catégorie.
+          Après l’envoi, tu verras un message de confirmation et tu recevras l’inscription par email.
         </div>
       </div>
 
@@ -307,13 +326,18 @@
   </div>
 
   <script>
-    // Affiche le bloc "Merci" quand on arrive sur #merci
+    // Affiche un message si on revient avec ?sent=1 (après Formspree)
     (function(){
-      if (window.location.hash === "#merci") {
-        var el = document.getElementById("merci");
-        if (el) el.style.display = "block";
-        // scroll doux vers le message
-        el && el.scrollIntoView({behavior:"smooth", block:"start"});
+      const params = new URLSearchParams(window.location.search);
+      if(params.get("sent") === "1"){
+        const el = document.getElementById("successMsg");
+        if(el) el.style.display = "block";
+        // nettoie l'URL après 2s (optionnel)
+        setTimeout(() => {
+          const url = new URL(window.location.href);
+          url.searchParams.delete("sent");
+          window.history.replaceState({}, "", url.toString());
+        }, 2000);
       }
     })();
   </script>
