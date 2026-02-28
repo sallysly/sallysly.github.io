@@ -35,16 +35,17 @@
       padding: 28px 0 60px;
     }
 
-    /* HERO (affiche entière visible) */
     .hero{
       background:#000;
       padding:18px 0 0;
     }
+
     .poster{
       width:min(1200px, calc(100% - 24px));
       margin:0 auto;
       padding: 12px 0 18px;
     }
+
     .poster img{
       width:100%;
       height:auto;
@@ -52,7 +53,6 @@
       object-fit:contain;
     }
 
-    /* TITRE */
     .title{
       margin: 10px auto 0;
       font-weight:900;
@@ -62,7 +62,6 @@
       text-transform:uppercase;
     }
 
-    /* SECTIONS */
     .section{
       margin-top: 28px;
       padding: 22px;
@@ -77,7 +76,6 @@
       margin:0 0 12px;
       color:var(--teal2);
       font-size: 22px;
-      text-align:left;
     }
 
     .section p{
@@ -94,7 +92,6 @@
 
     .block-title{
       font-weight:900;
-      color:#111;
       margin: 14px 0 6px;
     }
 
@@ -105,7 +102,6 @@
       line-height:1.55;
     }
 
-    /* FORM */
     .form-wrap{
       margin-top: 18px;
       padding: 18px;
@@ -123,18 +119,16 @@
 
     input, select{
       width:100%;
-      padding:12px 12px;
+      padding:12px;
       border:1px solid #d9dfe5;
       border-radius:10px;
       font-size:15px;
-      background:#fff;
     }
 
     button{
       background:var(--teal);
       border:none;
       padding:14px;
-      width:100%;
       font-size:16px;
       border-radius:10px;
       cursor:pointer;
@@ -151,123 +145,61 @@
       font-size:13px;
       color:#555;
       line-height:1.45;
-      text-align:left;
-    }
-
-    /* petit ajustement mobile */
-    @media (max-width:520px){
-      .section{ padding:16px; }
-      ul{ margin-left: 18px; }
     }
   </style>
 </head>
 
 <body>
 
-  <header class="hero">
-    <div class="poster">
-      <!-- Ton fichier image dans le repo -->
-      <img src="IMG_6543.png" alt="Swiss Dance Challenge 2026" />
-    </div>
-  </header>
+<header class="hero">
+  <div class="poster">
+    <img src="IMG_6543.png" alt="Swiss Dance Challenge 2026" />
+  </div>
+</header>
 
-  <div class="wrap">
-    <div class="title">Swiss Dance Challenge</div>
+<div class="wrap">
+  <div class="title">Swiss Dance Challenge</div>
 
-    <section class="section">
-      <h2>Détails de l'événement</h2>
-      <p>
-        Le Swiss Dance Challenge est de retour dans les Centres Manor du 11 au 28 mars 2026 pour une tournée explosive dédiée à la culture urbaine.
-      </p>
-      <p>
-        Trois semaines de battles, de musique et d’énergie pure au cœur de vos centres Manor. Danseurs, danseuses, familles, public… tout le monde est le bienvenu.
-      </p>
-      <p>
-        Et surtout : c’est 100% gratuit.<br>
-        Participation gratuite. Accès libre pour le public.
-      </p>
+  <section class="section">
 
-      <div class="divider"></div>
+    <h2>Inscription Battle</h2>
 
-      <h2>Dates des présélections</h2>
+    <div class="form-wrap">
 
-      <div class="block-title">Centre Manor Chavannes (Chemin Industriel 1, 1279 Chavannes-de-Bogis)</div>
-      <p>
-        Vendredi 13 mars 2026 : 18h00 à 21h00<br>
-        Samedi 14 mars 2026 : 14h00 à 17h00
-      </p>
+      <!-- FORMULAIRE CONNECTÉ À FORMSPREE -->
+      <form action="https://formspree.io/f/xojnbbkr" method="POST">
 
-      <div class="block-title">Centre Manor Monthey</div>
-      <p>
-        Vendredi 20 mars 2026 : 18h00 à 21h00<br>
-        Samedi 21 mars 2026 : 14h00 à 17h00
-      </p>
+        <input type="text" name="prenom" placeholder="Prénom" required>
+        <input type="text" name="nom" placeholder="Nom" required>
+        <input type="email" name="email" placeholder="Email" required>
 
-      <div class="block-title">Grande Finale – Samedi 28 mars – Centre Manor Vevey</div>
-      <p>Dernière opportunité de vous qualifier :</p>
-      <p>
-        Vendredi 27 mars 2026<br>
-        18h00 à 21h00
-      </p>
+        <select name="categorie" required>
+          <option value="">Choisir catégorie</option>
+          <option>Battle KIDZ (-16 ans)</option>
+          <option>Battle Adultes (17+)</option>
+        </select>
 
-      <div class="block-title">Catégories :</div>
-      <ul>
-        <li>Battle KIDZ : moins de 16 ans</li>
-        <li>Battle Adultes : dès 17 ans</li>
-      </ul>
+        <select name="date" required>
+          <option value="">Choisir une date</option>
+          <option>13 mars 2026</option>
+          <option>14 mars 2026</option>
+          <option>20 mars 2026</option>
+          <option>21 mars 2026</option>
+          <option>27 mars 2026</option>
+        </select>
 
-      <div class="divider"></div>
+        <button type="submit">S'inscrire</button>
 
-      <h2>Prize Money</h2>
-      <ul>
-        <li>2 x CHF 150.– pour les gagnants</li>
-        <li>6 x CHF 50.– pour les demi-finalistes</li>
-      </ul>
+      </form>
 
-      <p style="margin-top:14px;">
-        Venez vivre une expérience exceptionnelle dans vos Centres Manor.<br>
-        Ambiance, DJ, jury professionnel, public en feu… ça va être fort.
-      </p>
-      <p>
-        Les inscriptions sont ouvertes dès maintenant.<br>
-        Préparez votre meilleur round. Le dancefloor vous attend.
-      </p>
-
-      <div class="divider"></div>
-
-      <h2>Inscription Battle</h2>
-      <div class="form-wrap">
-        <!-- FORMULAIRE : inchangé, juste intégré dans le design -->
-        <form action="https://formspree.io/f/YOUR_ID" method="POST">
-          <input type="text" name="prenom" placeholder="Prénom" required>
-          <input type="text" name="nom" placeholder="Nom" required>
-          <input type="email" name="email" placeholder="Email" required>
-
-          <select name="categorie" required>
-            <option value="">Choisir catégorie</option>
-            <option>Battle KIDZ (-16 ans)</option>
-            <option>Battle Adultes (17+)</option>
-          </select>
-
-          <select name="date" required>
-            <option value="">Choisir une date</option>
-            <option>13 mars 2026</option>
-            <option>14 mars 2026</option>
-            <option>20 mars 2026</option>
-            <option>21 mars 2026</option>
-            <option>27 mars 2026</option>
-          </select>
-
-          <button type="submit">S'inscrire</button>
-        </form>
-
-        <div class="note">
-          Participation 100% gratuite. Choisis ta date de présélection et ta catégorie. Tu recevras une confirmation après l’envoi.
-        </div>
+      <div class="note">
+        Participation 100% gratuite. Tu recevras une confirmation après l’envoi.
       </div>
 
-    </section>
-  </div>
+    </div>
+
+  </section>
+</div>
 
 </body>
 </html>
