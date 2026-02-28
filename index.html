@@ -62,36 +62,9 @@
       text-transform:uppercase;
     }
 
-    /* Badges */
-    .badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin: 14px 0 0;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
-      box-shadow: 0 8px 18px rgba(0,0,0,.06);
-      font-weight:800;
-      color:#0f2b27;
-      font-size: 14px;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: var(--teal2);
-      display:inline-block;
-    }
-
     /* SECTIONS */
     .section{
-      margin-top: 22px;
+      margin-top: 28px;
       padding: 22px;
       background: var(--card);
       border: 1px solid var(--line);
@@ -132,18 +105,6 @@
       line-height:1.55;
     }
 
-    /* ALERT SUCCESS */
-    .success{
-      display:none;
-      margin-top:14px;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid #cfeeea;
-      background:#ecfbf9;
-      color:#0b3b34;
-      font-weight:800;
-    }
-
     /* FORM */
     .form-wrap{
       margin-top: 18px;
@@ -181,8 +142,11 @@
       font-weight:900;
     }
 
-    button:hover{
-      background:var(--teal2);
+    button:hover{ background:var(--teal2); }
+
+    button[disabled]{
+      opacity:.75;
+      cursor:not-allowed;
     }
 
     .note{
@@ -193,7 +157,28 @@
       text-align:left;
     }
 
-    /* petit ajustement mobile */
+    .alert{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#f9fafb;
+      color:#222;
+      font-size:14px;
+      line-height:1.45;
+      display:none;
+    }
+    .alert.ok{
+      border-color: rgba(23,199,183,.35);
+      background: rgba(37,227,209,.10);
+      display:block;
+    }
+    .alert.err{
+      border-color: rgba(220,38,38,.35);
+      background: rgba(220,38,38,.08);
+      display:block;
+    }
+
     @media (max-width:520px){
       .section{ padding:16px; }
       ul{ margin-left: 18px; }
@@ -205,7 +190,6 @@
 
   <header class="hero">
     <div class="poster">
-      <!-- Ton fichier image dans le repo (garde exactement ce nom) -->
       <img src="IMG_6543.png" alt="Swiss Dance Challenge 2026" />
     </div>
   </header>
@@ -213,22 +197,22 @@
   <div class="wrap">
     <div class="title">Swiss Dance Challenge</div>
 
-    <div class="badges" aria-label="Infos rapides">
-      <div class="badge"><span class="dot"></span> 11 au 28 mars 2026</div>
-      <div class="badge"><span class="dot"></span> Centres Manor</div>
-      <div class="badge"><span class="dot"></span> 100% gratuit</div>
-    </div>
-
     <section class="section">
       <h2>Présentation</h2>
       <p>
-        Le Swiss Dance Challenge revient en 2026 avec une tournée 100% urbaine dans les Centres Manor.
-        L’objectif est simple : rassembler la communauté, mettre en avant les talents, et faire vivre au public
-        une vraie expérience hip-hop, conviviale et accessible à tous.
+        Le Swiss Dance Challenge revient en 2026 avec une tournée 100% gratuite dans les Centres Manor.
+        L’objectif : rassembler la communauté, mettre en avant les danseurs et faire vibrer le public au rythme des battles.
       </p>
       <p>
-        Au programme : présélections, battles, DJ, jury professionnel et une ambiance de folie au cœur de vos centres.
-        Que tu sois danseur(se), parent, ami(e) ou simple curieux : tu es le bienvenu.
+        Ambiance, DJ, jury pro, shows et énergie urbaine… que tu viennes pour participer ou juste pour regarder,
+        tu es le/la bienvenu(e).
+      </p>
+
+      <div class="divider"></div>
+
+      <h2>Détails de l'événement</h2>
+      <p>
+        Du 11 au 28 mars 2026, trois semaines de danse et de partage au cœur de vos centres Manor.
       </p>
       <p>
         Participation gratuite. Accès libre pour le public.
@@ -257,7 +241,7 @@
         18h00 à 21h00
       </p>
 
-      <div class="block-title">Catégories</div>
+      <div class="block-title">Catégories :</div>
       <ul>
         <li>Battle KIDZ : moins de 16 ans</li>
         <li>Battle Adultes : dès 17 ans</li>
@@ -272,10 +256,6 @@
       </ul>
 
       <p style="margin-top:14px;">
-        Venez vivre une expérience exceptionnelle dans vos Centres Manor.<br>
-        Ambiance, DJ, jury professionnel, public en feu… ça va être fort.
-      </p>
-      <p>
         Les inscriptions sont ouvertes dès maintenant.<br>
         Préparez votre meilleur round. Le dancefloor vous attend.
       </p>
@@ -283,17 +263,12 @@
       <div class="divider"></div>
 
       <h2>Inscription Battle</h2>
-
-      <div class="success" id="successMsg">
-        ✅ Merci ! Ton inscription a bien été envoyée. On te recontacte si besoin.
-      </div>
-
       <div class="form-wrap">
-        <form action="https://formspree.io/f/xojnbbkr" method="POST">
-          <!-- Options Formspree -->
-          <input type="hidden" name="_subject" value="Nouvelle inscription - Swiss Dance Challenge 2026">
-          <input type="hidden" name="_redirect" value="https://espritducercle.ch/?sent=1">
-
+        <!-- IMPORTANT :
+             On garde action/method pour "fallback" si JS est désactivé,
+             mais on intercepte avec JS pour RESTER sur ton site (pas de redirection Formspree).
+        -->
+        <form id="inscriptionForm" action="https://formspree.io/f/xojnbbkr" method="POST">
           <input type="text" name="prenom" placeholder="Prénom" required>
           <input type="text" name="nom" placeholder="Nom" required>
           <input type="email" name="email" placeholder="Email" required>
@@ -313,12 +288,14 @@
             <option>27 mars 2026</option>
           </select>
 
-          <button type="submit">S'inscrire</button>
+          <button id="submitBtn" type="submit">S'inscrire</button>
         </form>
+
+        <div id="formMsg" class="alert"></div>
 
         <div class="note">
           Participation 100% gratuite. Choisis ta date de présélection et ta catégorie.
-          Après l’envoi, tu verras un message de confirmation et tu recevras l’inscription par email.
+          Tu recevras une confirmation après l’envoi.
         </div>
       </div>
 
@@ -326,19 +303,47 @@
   </div>
 
   <script>
-    // Affiche un message si on revient avec ?sent=1 (après Formspree)
-    (function(){
-      const params = new URLSearchParams(window.location.search);
-      if(params.get("sent") === "1"){
-        const el = document.getElementById("successMsg");
-        if(el) el.style.display = "block";
-        // nettoie l'URL après 2s (optionnel)
-        setTimeout(() => {
-          const url = new URL(window.location.href);
-          url.searchParams.delete("sent");
-          window.history.replaceState({}, "", url.toString());
-        }, 2000);
+    (function () {
+      const form = document.getElementById("inscriptionForm");
+      const btn  = document.getElementById("submitBtn");
+      const msg  = document.getElementById("formMsg");
+
+      function setMsg(type, text){
+        msg.className = "alert " + (type === "ok" ? "ok" : "err");
+        msg.textContent = text;
       }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault(); // empêche la redirection Formspree
+
+        msg.className = "alert";
+        msg.textContent = "";
+        btn.disabled = true;
+        const oldText = btn.textContent;
+        btn.textContent = "Envoi en cours...";
+
+        try {
+          const data = new FormData(form);
+
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: data,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (res.ok) {
+            setMsg("ok", "✅ Inscription envoyée ! Merci — on t’a bien enregistré.");
+            form.reset();
+          } else {
+            setMsg("err", "❌ Oups, l’envoi n’a pas fonctionné. Réessaie dans 30 secondes.");
+          }
+        } catch (err) {
+          setMsg("err", "❌ Problème de connexion. Vérifie internet et réessaie.");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = oldText;
+        }
+      });
     })();
   </script>
 
