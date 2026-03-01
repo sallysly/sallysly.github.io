@@ -69,6 +69,16 @@ button {
 button:hover {
     background-color: #008f8a;
 }
+
+#success-message {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #e6fffa;
+    border-radius: 8px;
+    color: #008f8a;
+    font-weight: bold;
+}
 </style>
 </head>
 
@@ -83,13 +93,8 @@ button:hover {
 <h1>🔥 SWISS DANCE VEVEY 2026 🔥</h1>
 
 <p>
-Rendez-vous le <strong>dimanche 29 mars 2026</strong> dès 15h00
-au Pavillon du Jardin du Rivage à Vevey pour un après-midi 100% culture hip-hop.
-</p>
-
-<p>
-Un événement proposé par l’Association Esprit du Cercle,
-en collaboration avec la Ville de Vevey.
+Dimanche <strong>29 mars 2026</strong> dès 15h00  
+Pavillon du Jardin du Rivage – Vevey
 </p>
 
 <p>
@@ -97,8 +102,7 @@ en collaboration avec la Ville de Vevey.
 💥 Battle Adultes<br>
 🎤 Speaker : TUTUR<br>
 👩‍⚖️ Juges : Jenna & UUB<br>
-🌟 Dance show exceptionnel de l’école de danse de Mel<br>
-🎶 Ambiance hip-hop, énergie et performance
+🌟 Show de l’école de danse de Mel
 </p>
 
 <p><strong>Événement entièrement gratuit.</strong></p>
@@ -107,20 +111,14 @@ en collaboration avec la Ville de Vevey.
 <iframe src="https://www.youtube.com/embed/zftt5rOMt84" frameborder="0" allowfullscreen></iframe>
 </div>
 
-<h2 style="margin-top:40px;">Inscription Battle – 29 mars 2026</h2>
+<h2 style="margin-top:40px;">Inscription Battle</h2>
 
-<form action="https://formspree.io/f/xojnbbkr" method="POST">
+<form id="my-form" action="https://formspree.io/f/xojnbbkr" method="POST">
 
-<!-- DATE AUTOMATIQUE -->
 <input type="hidden" name="date" value="29 mars 2026">
 
-<!-- REDIRECTION VERS PAGE MERCI -->
-<input type="hidden" name="_redirect" value="https://espritducercle.ch/merci-vevey.html">
-
 <input type="text" name="prenom" placeholder="Prénom" required>
-
 <input type="text" name="nom" placeholder="Nom" required>
-
 <input type="email" name="email" placeholder="Email" required>
 
 <select name="categorie" required>
@@ -133,7 +131,30 @@ en collaboration avec la Ville de Vevey.
 
 </form>
 
+<div id="success-message">
+🔥 Merci ! Ton inscription pour Swiss Dance Vevey 2026 est enregistrée.
 </div>
+
+</div>
+
+<script>
+var form = document.getElementById("my-form");
+var successMessage = document.getElementById("success-message");
+
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
+  var data = new FormData(form);
+  await fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+  form.style.display = "none";
+  successMessage.style.display = "block";
+});
+</script>
 
 </body>
 </html>
