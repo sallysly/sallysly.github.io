@@ -10,66 +10,66 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: black;
-}
-
-.hero {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-}
-
-.hero img {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-}
-
-.overlay {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 500px;
-}
-
-.overlay a {
-    display: block;
+    color: white;
     text-align: center;
-    padding: 18px;
-    margin: 15px 0;
+}
+
+h1 {
+    margin: 40px 20px;
+    font-size: 26px;
+}
+
+.section {
+    margin: 50px 20px;
+}
+
+.section img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 10px;
+    color: white;
     font-size: 16px;
 }
 
-.btn-manor {
-    background: #00b3ad;
-    color: white;
+.vevey-btn {
+    background: #ff9800;
 }
 
-.btn-vevey {
-    background: #ff9800;
-    color: white;
+.manor-btn {
+    background: #00b3ad;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-    <img src="Page-de-garde.JPG" alt="Swiss Dance Challenge">
+<h1>WELCOME TO THE PAGE OF SWISS DANCE CHALLENGE</h1>
 
-    <div class="overlay">
-        <a href="manor.html" class="btn-manor">
-            Événement 11 – 28 mars 2026 (Centres Manor)
-        </a>
+<!-- VEVEY EN PREMIER -->
+<div class="section">
+    <img src="VEVEY-BEST.PNG" alt="Swiss Dance Vevey">
+    <br>
+    <a href="vevey-29-mars.html" class="button vevey-btn">
+        29 March 2026 – Vevey
+    </a>
+</div>
 
-        <a href="vevey-29-mars.html" class="btn-vevey">
-            Événement 29 mars 2026 – Vevey
-        </a>
-    </div>
+<!-- MANOR EN DEUXIÈME -->
+<div class="section">
+    <img src="Page-de-garde.JPG" alt="Swiss Dance Manor">
+    <br>
+    <a href="manor.html" class="button manor-btn">
+        11 – 28 March 2026 – Centres Manor
+    </a>
 </div>
 
 </body>
