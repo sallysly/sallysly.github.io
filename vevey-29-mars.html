@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merci – Swiss Dance Vevey</title>
+<title>Swiss Dance Vevey 2026</title>
 
 <style>
 body {
@@ -19,32 +19,54 @@ body {
 }
 
 .section {
-    padding: 40px 20px;
+    padding: 30px 20px;
     max-width: 800px;
     margin: auto;
 }
 
 h1 {
     color: #00b3ad;
-    font-size: 32px;
 }
 
-p {
-    font-size: 18px;
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    margin-top: 25px;
 }
 
-.button {
-    display: inline-block;
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+form {
     margin-top: 30px;
-    padding: 15px 30px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
     background-color: #00b3ad;
     color: white;
-    text-decoration: none;
-    font-weight: bold;
+    padding: 15px 30px;
+    border: none;
     border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.button:hover {
+button:hover {
     background-color: #008f8a;
 }
 </style>
@@ -58,21 +80,58 @@ p {
 
 <div class="section">
 
-<h1>🔥 MERCI POUR TON INSCRIPTION 🔥</h1>
+<h1>🔥 SWISS DANCE VEVEY 2026 🔥</h1>
 
 <p>
-Ton inscription pour <strong>Swiss Dance Vevey – 29 mars 2026</strong>
-a bien été enregistrée.
+Rendez-vous le <strong>dimanche 29 mars 2026</strong> dès 15h00
+au Pavillon du Jardin du Rivage à Vevey pour un après-midi 100% culture hip-hop.
 </p>
 
 <p>
-Vevey va vibrer au rythme du hip-hop 💥<br>
-On se retrouve le 29 mars !
+Un événement proposé par l’Association Esprit du Cercle,
+en collaboration avec la Ville de Vevey.
 </p>
 
-<a href="https://espritducercle.ch/vevey-29-mars.html" class="button">
-Retour à l'événement
-</a>
+<p>
+💥 Battle Kidz<br>
+💥 Battle Adultes<br>
+🎤 Speaker : TUTUR<br>
+👩‍⚖️ Juges : Jenna & UUB<br>
+🌟 Dance show exceptionnel de l’école de danse de Mel<br>
+🎶 Ambiance hip-hop, énergie et performance
+</p>
+
+<p><strong>Événement entièrement gratuit.</strong></p>
+
+<div class="video-container">
+<iframe src="https://www.youtube.com/embed/zftt5rOMt84" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<h2 style="margin-top:40px;">Inscription Battle – 29 mars 2026</h2>
+
+<form action="https://formspree.io/f/xojnbbkr" method="POST">
+
+<!-- DATE AUTOMATIQUE -->
+<input type="hidden" name="date" value="29 mars 2026">
+
+<!-- REDIRECTION VERS PAGE MERCI -->
+<input type="hidden" name="_redirect" value="https://espritducercle.ch/merci-vevey.html">
+
+<input type="text" name="prenom" placeholder="Prénom" required>
+
+<input type="text" name="nom" placeholder="Nom" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<select name="categorie" required>
+<option value="">Choisir une catégorie</option>
+<option value="Kidz">Battle Kidz</option>
+<option value="Adultes">Battle Adultes</option>
+</select>
+
+<button type="submit">S'inscrire</button>
+
+</form>
 
 </div>
 
