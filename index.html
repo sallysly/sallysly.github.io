@@ -14,12 +14,29 @@ body {
     text-align: center;
 }
 
+/* HEADER */
+.header {
+    padding: 40px 20px 10px 20px;
+}
+
+.header img {
+    height: 90px;
+    margin-bottom: 15px;
+}
+
+.association {
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
 h1 {
-    margin: 40px 20px;
-    font-size: 28px;
+    font-size: 26px;
     letter-spacing: 2px;
 }
 
+/* CARDS */
 .container {
     display: flex;
     flex-direction: column;
@@ -65,29 +82,66 @@ h1 {
     color: white;
     display: block;
 }
+
+/* FOOTER SPONSORS */
+footer {
+    margin-top: 80px;
+    padding: 60px 20px;
+    background: #000;
+}
+
+footer h2 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    color: #aaa;
+}
+
+.sponsors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+}
+
+.sponsors img {
+    height: 60px;
+    transition: 0.3s;
+    opacity: 0.8;
+}
+
+.sponsors img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
 </style>
 </head>
 
 <body>
 
-<h1>WELCOME TO THE SWISS DANCE CHALLENGE</h1>
+<div class="header">
+    <img src="LOGO-ESPRIT-DU CERCLE.png">
+    <div class="association">ASSOCIATION ESPRIT DU CERCLE</div>
+    <h1>WELCOME TO THE SWISS DANCE CHALLENGE</h1>
+</div>
 
 <div class="container">
 
-    <!-- MANOR EN PREMIER -->
+    <!-- MANOR -->
     <div class="card manor">
         <a href="manor.html">
-            <img src="IMG_6543.png" alt="Swiss Dance Manor">
+            <img src="IMG_6543.png">
             <div class="card-title">
                 11 – 28 March 2026 • Centres Manor
             </div>
         </a>
     </div>
 
-    <!-- VEVEY EN DEUXIÈME -->
+    <!-- VEVEY -->
     <div class="card vevey">
         <a href="vevey-29-mars.html">
-            <img src="VEVEY-BEST.PNG" alt="Swiss Dance Vevey">
+            <img src="VEVEY-BEST.PNG">
             <div class="card-title">
                 29 March 2026 • Vevey
             </div>
@@ -95,6 +149,21 @@ h1 {
     </div>
 
 </div>
+
+<footer>
+    <h2>OFFICIAL PARTNERS</h2>
+
+    <div class="sponsors">
+        <img src="LOGO-LOTERIE.jpg">
+        <img src="Logo-Vevey-Ville-Images.png">
+        <img src="LOGO-SION-CAPITAL.png">
+        <img src="LOGO-DELEMONT.png">
+        <img src="LOGO-NEUCHATEL.png">
+        <img src="logo-MARTIGNY.jpg">
+        <img src="LOGO-CULTURE-VALAIS.png">
+        <img src="LOGO-BOY.png">
+    </div>
+</footer>
 
 </body>
 </html>
