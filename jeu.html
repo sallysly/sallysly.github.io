@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breakdance Challenge Game</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:url('Decord-jeu.JPG') center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+text-align:center;
+}
+
+.overlay{
+background:rgba(0,0,0,0.6);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(5px);
+}
+
+h1{
+margin-bottom:10px;
+}
+
+#move{
+font-size:40px;
+margin:20px 0;
+}
+
+#score{
+font-size:22px;
+margin-bottom:10px;
+}
+
+#timer{
+font-size:22px;
+margin-bottom:20px;
+}
+
+button{
+padding:15px 30px;
+font-size:18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#ff3c3c;
+color:white;
+font-weight:bold;
+}
+
+button:hover{
+background:#ff0000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+<h1>🔥 Breakdance Battle 🔥</h1>
+<p>Tap as fast as you can for 15 seconds!</p>
+
+<div id="timer">Time: 15</div>
+<div id="score">Score: 0</div>
+<div id="move">Ready?</div>
+
+<button onclick="startGame()">START</button>
+</div>
+
+<script>
+let score = 0;
+let timeLeft = 15;
+let timer;
+let playing = false;
+
+const moves = [
+"👣 6-Step Footwork",
+"🧊 Baby Freeze",
+"💥 Windmill",
+"🔥 Flare (Thomas)",
+"🌀 Headspin"
+];
+
+function startGame(){
+score = 0;
+timeLeft = 15;
+playing = true;
+document.getElementById("score").innerText = "Score: 0";
+document.getElementById("timer").innerText = "Time: 15";
+document.getElementById("move").innerText = "GO!";
+timer = setInterval(countdown,1000);
+}
+
+function countdown(){
+timeLeft--;
+document.getElementById("timer").innerText = "Time: " + timeLeft;
+if(timeLeft <= 0){
+clearInterval(timer);
+playing = false;
+document.getElementById("move").innerText = "🏆 Final Score: " + score;
+}
+}
+
+document.body.addEventListener("click",function(){
+if(playing){
+score++;
+document.getElementById("score").innerText = "Score: " + score;
+let randomMove = moves[Math.floor(Math.random()*moves.length)];
+document.getElementById("move").innerText = randomMove;
+}
+});
+</script>
+
+</body>
+</html>
