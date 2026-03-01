@@ -6,114 +6,127 @@
 <title>Swiss Dance Challenge</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f0f0f;
-    color: white;
-    text-align: center;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f0f0f;
+  color:white;
+  text-align:center;
 }
 
 /* HEADER */
-.header {
-    padding: 40px 20px 10px 20px;
+.header{
+  padding:40px 20px 10px 20px;
 }
 
-.header img {
-    height: 90px;
-    margin-bottom: 15px;
+.header img{
+  height:90px;
+  margin-bottom:15px;
 }
 
-.association {
-    font-size: 18px;
-    letter-spacing: 3px;
-    color: #aaa;
-    margin-bottom: 20px;
+.association{
+  font-size:16px;
+  letter-spacing:3px;
+  color:#bdbdbd;
+  margin-bottom:20px;
+  text-transform:uppercase;
 }
 
-h1 {
-    font-size: 26px;
-    letter-spacing: 2px;
+h1{
+  margin:0;
+  font-size:26px;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
-/* CARDS */
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    align-items: center;
-    padding: 20px;
+/* EVENT CARDS */
+.container{
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+  align-items:center;
+  padding:20px;
 }
 
-.card {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    transition: transform 0.3s ease;
+.card{
+  width:100%;
+  max-width:800px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+  transition:.3s ease;
 }
 
-.card:hover {
-    transform: scale(1.03);
+.card:hover{
+  transform:scale(1.02);
 }
 
-.card img {
-    width: 100%;
-    display: block;
+.card a{
+  display:block;
+  text-decoration:none;
+  color:white;
 }
 
-.card-title {
-    padding: 20px;
-    font-size: 18px;
-    font-weight: bold;
+.card img{
+  width:100%;
+  display:block;
 }
 
-.manor {
-    background: linear-gradient(45deg, #00b3ad, #008f8a);
+.card-title{
+  padding:18px;
+  font-size:18px;
+  font-weight:bold;
 }
 
-.vevey {
-    background: linear-gradient(45deg, #ff9800, #e68900);
+.manor{
+  background:linear-gradient(45deg,#00b3ad,#008f8a);
 }
 
-.card a {
-    text-decoration: none;
-    color: white;
-    display: block;
+.vevey{
+  background:linear-gradient(45deg,#ff9800,#e68900);
 }
 
-/* FOOTER SPONSORS */
-footer {
-    margin-top: 80px;
-    padding: 60px 20px;
-    background: #000;
+/* FOOTER */
+footer{
+  margin-top:80px;
+  padding:60px 20px;
+  background:#000;
 }
 
-footer h2 {
-    font-size: 16px;
-    letter-spacing: 3px;
-    margin-bottom: 40px;
-    color: #aaa;
+footer h2{
+  font-size:14px;
+  letter-spacing:4px;
+  margin-bottom:40px;
+  color:#bdbdbd;
+  text-transform:uppercase;
 }
 
-.sponsors {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-    align-items: center;
+.sponsors{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:35px 45px;
 }
 
-.sponsors img {
-    height: 60px;
-    transition: 0.3s;
-    opacity: 0.8;
+.sponsors img{
+  height:60px;
+  max-width:180px;
+  object-fit:contain;
+  opacity:.85;
+  transition:.3s ease;
 }
 
-.sponsors img:hover {
-    opacity: 1;
-    transform: scale(1.1);
+.sponsors img:hover{
+  opacity:1;
+  transform:scale(1.08);
+}
+
+.bottom-note{
+  margin-top:30px;
+  font-size:12px;
+  color:#888;
+  letter-spacing:1px;
 }
 </style>
 </head>
@@ -121,48 +134,54 @@ footer h2 {
 <body>
 
 <div class="header">
-    <img src="LOGO-ESPRIT-DU CERCLE.png">
-    <div class="association">ASSOCIATION ESPRIT DU CERCLE</div>
-    <h1>WELCOME TO THE SWISS DANCE CHALLENGE</h1>
+  <img src="LOGO-ESPRIT.PNG" alt="Association Esprit du Cercle">
+  <div class="association">Association Esprit Du Cercle</div>
+  <h1>WELCOME TO THE SWISS DANCE CHALLENGE</h1>
 </div>
 
 <div class="container">
 
-    <!-- MANOR -->
-    <div class="card manor">
-        <a href="manor.html">
-            <img src="IMG_6543.png">
-            <div class="card-title">
-                11 – 28 March 2026 • Centres Manor
-            </div>
-        </a>
-    </div>
+  <!-- MANOR EN PREMIER -->
+  <div class="card manor">
+    <a href="manor.html">
+      <img src="IMG_6543.png" alt="Swiss Dance Challenge - Centres Manor">
+      <div class="card-title">
+        11 – 28 March 2026 • Centres Manor
+      </div>
+    </a>
+  </div>
 
-    <!-- VEVEY -->
-    <div class="card vevey">
-        <a href="vevey-29-mars.html">
-            <img src="VEVEY-BEST.PNG">
-            <div class="card-title">
-                29 March 2026 • Vevey
-            </div>
-        </a>
-    </div>
+  <!-- VEVEY -->
+  <div class="card vevey">
+    <a href="vevey-29-mars.html">
+      <img src="VEVEY-BEST.PNG" alt="Swiss Dance Vevey">
+      <div class="card-title">
+        29 March 2026 • Vevey
+      </div>
+    </a>
+  </div>
 
 </div>
 
 <footer>
-    <h2>OFFICIAL PARTNERS</h2>
 
-    <div class="sponsors">
-        <img src="LOGO-LOTERIE.jpg">
-        <img src="Logo-Vevey-Ville-Images.png">
-        <img src="LOGO-SION-CAPITAL.png">
-        <img src="LOGO-DELEMONT.png">
-        <img src="LOGO-NEUCHATEL.png">
-        <img src="logo-MARTIGNY.jpg">
-        <img src="LOGO-CULTURE-VALAIS.png">
-        <img src="LOGO-BOY.png">
-    </div>
+  <h2>Official Partners</h2>
+
+  <div class="sponsors">
+    <img src="LOGO-LOTERIE.jpg" alt="Loterie Romande">
+    <img src="Logo-Vevey-Ville.png" alt="Vevey Ville d'Images">
+    <img src="LOGO-SION-CAPITAL.png" alt="Sion Capital">
+    <img src="LOGO-DELEMONT.png" alt="Delémont">
+    <img src="LOGO-NEUCHATEL.png" alt="Neuchâtel">
+    <img src="logo-MARTIGNY.jpg" alt="Martigny">
+    <img src="LOGO-CULTURE.PNG" alt="Culture">
+    <img src="LOGOBOY.png" alt="Partner">
+  </div>
+
+  <div class="bottom-note">
+    espritducercle.ch
+  </div>
+
 </footer>
 
 </body>
