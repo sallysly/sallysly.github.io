@@ -9,67 +9,91 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: black;
+    background: #0f0f0f;
     color: white;
     text-align: center;
 }
 
 h1 {
     margin: 40px 20px;
-    font-size: 26px;
+    font-size: 28px;
+    letter-spacing: 2px;
 }
 
-.section {
-    margin: 50px 20px;
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    padding: 20px;
 }
 
-.section img {
+.card {
     width: 100%;
-    max-width: 700px;
-    border-radius: 12px;
+    max-width: 800px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    transition: transform 0.3s ease;
 }
 
-.button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 15px 30px;
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card img {
+    width: 100%;
+    display: block;
+}
+
+.card-title {
+    padding: 20px;
+    font-size: 18px;
     font-weight: bold;
+}
+
+.manor {
+    background: linear-gradient(45deg, #00b3ad, #008f8a);
+}
+
+.vevey {
+    background: linear-gradient(45deg, #ff9800, #e68900);
+}
+
+.card a {
     text-decoration: none;
-    border-radius: 10px;
     color: white;
-    font-size: 16px;
-}
-
-.vevey-btn {
-    background: #ff9800;
-}
-
-.manor-btn {
-    background: #00b3ad;
+    display: block;
 }
 </style>
 </head>
 
 <body>
 
-<h1>WELCOME TO THE PAGE OF SWISS DANCE CHALLENGE</h1>
+<h1>WELCOME TO THE SWISS DANCE CHALLENGE</h1>
 
-<!-- VEVEY EN PREMIER -->
-<div class="section">
-    <img src="VEVEY-BEST.PNG" alt="Swiss Dance Vevey">
-    <br>
-    <a href="vevey-29-mars.html" class="button vevey-btn">
-        29 March 2026 – Vevey
-    </a>
-</div>
+<div class="container">
 
-<!-- MANOR EN DEUXIÈME -->
-<div class="section">
-    <img src="Page-de-garde.JPG" alt="Swiss Dance Manor">
-    <br>
-    <a href="manor.html" class="button manor-btn">
-        11 – 28 March 2026 – Centres Manor
-    </a>
+    <!-- MANOR EN PREMIER -->
+    <div class="card manor">
+        <a href="manor.html">
+            <img src="Page-de-garde.JPG" alt="Swiss Dance Manor">
+            <div class="card-title">
+                11 – 28 March 2026 • Centres Manor
+            </div>
+        </a>
+    </div>
+
+    <!-- VEVEY EN DEUXIÈME -->
+    <div class="card vevey">
+        <a href="vevey-29-mars.html">
+            <img src="VEVEY-BEST.PNG" alt="Swiss Dance Vevey">
+            <div class="card-title">
+                29 March 2026 • Vevey
+            </div>
+        </a>
+    </div>
+
 </div>
 
 </body>
