@@ -39,11 +39,11 @@ h1{
   text-transform:uppercase;
 }
 
-/* EVENT CARDS */
+/* EVENT CARD */
 .container{
   display:flex;
   flex-direction:column;
-  gap:40px;
+  gap:25px;
   align-items:center;
   padding:20px;
 }
@@ -82,21 +82,30 @@ h1{
   background:linear-gradient(45deg,#00b3ad,#008f8a);
 }
 
-.vevey{
-  background:linear-gradient(45deg,#ff9800,#e68900);
+.info-box{
+  width:100%;
+  max-width:800px;
+  background:#181818;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:22px 20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  line-height:1.6;
+  font-size:18px;
+  color:white;
 }
 
 /* FOOTER */
 footer{
-  margin-top:80px;
-  padding:60px 20px;
+  margin-top:40px;
+  padding:40px 20px 60px;
   background:#000;
 }
 
 footer h2{
   font-size:14px;
   letter-spacing:4px;
-  margin-bottom:40px;
+  margin-bottom:30px;
   color:#bdbdbd;
   text-transform:uppercase;
 }
@@ -141,7 +150,6 @@ footer h2{
 
 <div class="container">
 
-  <!-- MANOR EN PREMIER -->
   <div class="card manor">
     <a href="manor.html">
       <img src="IMG_6543.png" alt="Swiss Dance Challenge - Centres Manor">
@@ -151,14 +159,8 @@ footer h2{
     </a>
   </div>
 
-  <!-- VEVEY -->
-  <div class="card vevey">
-    <a href="vevey-29-mars.html">
-      <img src="VEVEY-BEST.PNG" alt="Swiss Dance Vevey">
-      <div class="card-title">
-        29 March 2026 • Vevey
-      </div>
-    </a>
+  <div class="info-box">
+    Du au froid, nous faisons tout l’événement du 29 mars ce samedi 28 mars au Centre Manor dès 14h jusqu’à 17h.
   </div>
 
 </div>
