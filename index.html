@@ -46,6 +46,19 @@ h1{
   line-height:1.5;
 }
 
+/* HERO IMAGE */
+.hero{
+  max-width:1000px;
+  margin:20px auto;
+  padding:0 20px;
+}
+
+.hero img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.6);
+}
+
 /* GALLERY */
 .gallery{
   display:grid;
@@ -65,7 +78,7 @@ h1{
   transition:all 0.8s ease;
 }
 
-/* visible animation */
+/* animation visible */
 .gallery img.show{
   opacity:1;
   transform:scale(1);
@@ -124,6 +137,11 @@ footer h2{
   </div>
 </div>
 
+<!-- IMAGE PRINCIPALE -->
+<div class="hero">
+  <img src="ecran-loterie.jpeg">
+</div>
+
 <!-- PHOTOS -->
 <div class="gallery">
   <img src="IMG_8452.jpeg">
@@ -157,7 +175,7 @@ footer h2{
 
 </footer>
 
-<!-- SCRIPT ANIMATION -->
+<!-- ANIMATION -->
 <script>
 const images = document.querySelectorAll('.gallery img');
 
