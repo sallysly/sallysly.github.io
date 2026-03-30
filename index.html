@@ -59,19 +59,16 @@ h1{
   border-radius:15px;
   object-fit:cover;
   box-shadow:0 10px 25px rgba(0,0,0,0.5);
-
   opacity:0;
   transform:scale(0.9);
   transition:all 0.8s ease;
 }
 
-/* visible animation */
 .gallery img.show{
   opacity:1;
   transform:scale(1);
 }
 
-/* hover */
 .gallery img:hover{
   transform:scale(1.05);
 }
@@ -113,7 +110,7 @@ footer h2{
 <body>
 
 <div class="header">
-  <img src="LOGO-ESPRIT.PNG">
+  <img src="LOGO-ESPRIT.PNG" alt="Association Esprit du Cercle">
   <div class="association">Association Esprit Du Cercle</div>
 
   <h1>Swiss Dance Challenge 2026</h1>
@@ -124,16 +121,15 @@ footer h2{
   </div>
 </div>
 
-<!-- PHOTOS -->
 <div class="gallery">
-  <img src="IMG_8452.jpeg">
-  <img src="IMG_8456.jpeg">
-  <img src="IMG_8457.jpeg">
-  <img src="IMG_8458.jpeg">
-  <img src="IMG_8459.jpeg">
-  <img src="IMG_8460.jpeg">
-  <img src="IMG_8461.jpeg">
-  <img src="IMG_8464.jpeg">
+  <img src="IMG_8452.jpeg" alt="Swiss Dance Challenge photo 1">
+  <img src="IMG_8456.jpeg" alt="Swiss Dance Challenge photo 2">
+  <img src="IMG_8457.jpeg" alt="Swiss Dance Challenge photo 3">
+  <img src="IMG_8458.jpeg" alt="Swiss Dance Challenge photo 4">
+  <img src="IMG_8459.jpeg" alt="Swiss Dance Challenge photo 5">
+  <img src="IMG_8460.jpeg" alt="Swiss Dance Challenge photo 6">
+  <img src="IMG_8461.jpeg" alt="Swiss Dance Challenge photo 7">
+  <img src="IMG_8464.jpeg" alt="Swiss Dance Challenge photo 8">
 </div>
 
 <footer>
@@ -141,14 +137,14 @@ footer h2{
   <h2>Official Partners</h2>
 
   <div class="sponsors">
-    <img src="LOGO-LOTERIE.jpg">
-    <img src="Logo-Vevey-Ville.png">
-    <img src="LOGO-SION-CAPITAL.png">
-    <img src="LOGO-DELEMONT.png">
-    <img src="LOGO-NEUCHATEL.png">
-    <img src="logo-MARTIGNY.jpg">
-    <img src="LOGO-CULTURE.PNG">
-    <img src="LOGOBOY.png">
+    <img src="LOGO-LOTERIE.jpg" alt="Loterie Romande">
+    <img src="Logo-Vevey-Ville.png" alt="Vevey Ville d'Images">
+    <img src="LOGO-SION-CAPITAL.png" alt="Sion Capital">
+    <img src="LOGO-DELEMONT.png" alt="Delémont">
+    <img src="LOGO-NEUCHATEL.png" alt="Neuchâtel">
+    <img src="logo-MARTIGNY.jpg" alt="Martigny">
+    <img src="LOGO-CULTURE.PNG" alt="Culture">
+    <img src="LOGOBOY.png" alt="Partner">
   </div>
 
   <div class="bottom-note">
@@ -157,7 +153,6 @@ footer h2{
 
 </footer>
 
-<!-- SCRIPT ANIMATION -->
 <script>
 const images = document.querySelectorAll('.gallery img');
 
