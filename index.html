@@ -59,11 +59,21 @@ h1{
   border-radius:15px;
   object-fit:cover;
   box-shadow:0 10px 25px rgba(0,0,0,0.5);
-  transition:.3s;
+
+  opacity:0;
+  transform:scale(0.9);
+  transition:all 0.8s ease;
 }
 
+/* visible animation */
+.gallery img.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* hover */
 .gallery img:hover{
-  transform:scale(1.03);
+  transform:scale(1.05);
 }
 
 /* FOOTER */
@@ -146,6 +156,21 @@ footer h2{
   </div>
 
 </footer>
+
+<!-- SCRIPT ANIMATION -->
+<script>
+const images = document.querySelectorAll('.gallery img');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+images.forEach(img => observer.observe(img));
+</script>
 
 </body>
 </html>
