@@ -9,3 +9,56 @@ let language='fr';const video=document.getElementById('cover'),toggle=document.g
 function videoLabel(){toggle.textContent=({fr:['Lire la vidéo','Mettre la vidéo en pause'],en:['Play video','Pause video'],de:['Video abspielen','Video pausieren']})[language][video.paused?0:1];toggle.setAttribute('aria-pressed',String(!video.paused));}
 function render(lang){language=lang;document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(el=>{if(translations[lang][el.dataset.i])el.textContent=translations[lang][el.dataset.i];});document.getElementById('cards').innerHTML=artists.map((a,i)=>{const country=lang==='fr'?a[1]:i===0?(lang==='en'?'South Korea':'Südkorea'):i===1?'USA':lang==='de'?'Frankreich':'France';return `<article class="artist"><div class="portrait"><img src="assets/kartel/${a[2]}" alt="${a[0]}" loading="lazy"><span class="number">0${i+1} / WORKSHOP</span></div><p class="country">${country.toUpperCase()}</p><h3>${a[0]}</h3><p class="style">${a[3]}</p><p class="time">${a[4]==='À confirmer'?(lang==='en'?'Time to be confirmed':lang==='de'?'Uhrzeit folgt':'Horaire à confirmer'):a[4]}<span>1h30</span></p><details><summary>${lang==='en'?'Biography':lang==='de'?'Biografie':'Biographie'}</summary><p>${lang==='fr'?a[5]:bios[lang][i]}</p></details></article>`;}).join('');videoLabel();}
 document.getElementById('language').addEventListener('change',e=>render(e.target.value));toggle.addEventListener('click',()=>{if(video.paused)video.play().catch(videoLabel);else video.pause();});video.addEventListener('play',videoLabel);video.addEventListener('pause',videoLabel);if(matchMedia('(prefers-reduced-motion: reduce)').matches){video.autoplay=false;video.pause();}render('fr');
+
+
+;(() => {
+const text={"fr":{"title":"INSCRIPTIONS","intro":"Choisis ta formule, puis envoie ton inscription. Le paiement est vérifié manuellement par l’organisation.","name":"Nom et prénom","email":"Adresse e-mail","formula":"Ta formule","single":"Un stage — 50 CHF","all":"Les quatre stages — 100 CHF","stage":"Choisir un stage","method":"Moyen de paiement","pending":"à venir","privacy":"J’accepte la transmission de mes coordonnées et de mon choix de stages à l’Association Esprit du Cercle via Formspree pour gérer mon inscription.","submit":"Envoyer mon inscription","sending":"Envoi en cours…","total":"Total","success":"Inscription transmise. Elle reste soumise à la confirmation de l’organisation ; le paiement n’est pas encore vérifié.","error":"Impossible de confirmer l’envoi. Vérifie ta connexion et réessaie.","payment":"Paiement TWINT","payinfo":"Envoie le montant indiqué au +41 79 814 67 00 et indique ton nom ainsi que la référence ci-dessous dans le message du paiement.","ref":"Référence","note":"Conserve cette référence. Aucun e-mail de confirmation automatique ni contrôle automatique du paiement n’est garanti par ce formulaire."},"en":{"title":"REGISTRATION","intro":"Choose your option and submit your registration. Payment is checked manually by the organiser.","name":"Full name","email":"Email address","formula":"Your option","single":"One workshop — CHF 50","all":"All four workshops — CHF 100","stage":"Choose a workshop","method":"Payment method","pending":"coming soon","privacy":"I agree to send my contact details and workshop selection to Association Esprit du Cercle via Formspree to manage my registration.","submit":"Submit registration","sending":"Sending…","total":"Total","success":"Registration submitted. Organiser confirmation is still required; payment has not been verified.","error":"We could not confirm submission. Check your connection and try again.","payment":"TWINT payment","payinfo":"Send the displayed amount to +41 79 814 67 00 and include your name and the reference below in the payment message.","ref":"Reference","note":"Keep this reference. This form does not guarantee an automatic confirmation email or automatic payment verification."},"de":{"title":"ANMELDUNG","intro":"Wähle dein Angebot und sende deine Anmeldung. Die Zahlung wird von der Organisation manuell geprüft.","name":"Vor- und Nachname","email":"E-Mail-Adresse","formula":"Dein Angebot","single":"Ein Workshop — CHF 50","all":"Alle vier Workshops — CHF 100","stage":"Workshop wählen","method":"Zahlungsart","pending":"folgt","privacy":"Ich stimme der Übermittlung meiner Kontaktdaten und Workshop-Auswahl über Formspree an die Association Esprit du Cercle zur Bearbeitung meiner Anmeldung zu.","submit":"Anmeldung senden","sending":"Wird gesendet…","total":"Gesamtbetrag","success":"Anmeldung übermittelt. Die Bestätigung der Organisation steht noch aus; die Zahlung wurde noch nicht geprüft.","error":"Die Übermittlung konnte nicht bestätigt werden. Prüfe deine Verbindung und versuche es erneut.","payment":"TWINT-Zahlung","payinfo":"Sende den angezeigten Betrag an +41 79 814 67 00 und gib deinen Namen und die untenstehende Referenz in der Zahlungsnachricht an.","ref":"Referenz","note":"Bewahre diese Referenz auf. Dieses Formular garantiert keine automatische Bestätigungs-E-Mail oder automatische Zahlungsprüfung."}};
+const form=document.getElementById('registration-form');
+if(!form)return;
+const selector=document.getElementById('language');
+const total=document.getElementById('registration-total');
+const status=document.getElementById('registration-status');
+const stage=document.getElementById('registration-stage');
+let busy=false, sent=false, statusKey='';
+const reference='KARTEL-'+crypto.randomUUID().slice(0,8).toUpperCase();
+const lang=()=>selector.value;
+function update(){
+ const t=text[lang()];
+ document.querySelectorAll('[data-r]').forEach(el=>el.textContent=t[el.dataset.r]);
+ const full=form.elements.formula.value==='all';
+ stage.disabled=sent||full;
+ document.getElementById('stage-field').hidden=full;
+ total.textContent=(full?100:50)+' CHF';
+ form.querySelector('button[type=submit]').textContent=busy?t.sending:t.submit;
+ for(const option of form.elements.payment_method.options)if(option.disabled)option.textContent=option.value+' — '+t.pending;
+ if(statusKey)status.textContent=t[statusKey];
+}
+form.addEventListener('change',update);
+selector.addEventListener('change',update);
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(busy||sent||!form.reportValidity())return;
+ busy=true;statusKey='';status.textContent='';
+ const button=form.querySelector('button[type=submit]');button.disabled=true;update();
+ const full=form.elements.formula.value==='all';
+ const amount=full?100:50;
+ const data=new FormData(form);
+ data.set('formula',full?'All four workshops':'Single workshop');
+ data.set('workshops',full?Array.from(stage.options).map(o=>o.value).join(' | '):stage.value);
+ data.set('amount_chf',String(amount));data.set('currency','CHF');
+ data.set('reference',reference);data.set('language',lang());
+ data.set('payment_status','Pending manual verification');
+ const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);
+ try{
+ const response=await fetch(form.action,{method:'POST',body:data,headers:{Accept:'application/json'},signal:controller.signal});
+ if(!response.ok)throw Error('Submission rejected');
+ sent=true;statusKey='success';
+ for(const el of form.elements)el.disabled=true;
+ document.getElementById('payment-amount').textContent=amount+' CHF';
+ document.getElementById('payment-reference').textContent=reference;
+ const panel=document.getElementById('registration-payment');panel.hidden=false;panel.style.display='flex';
+ }catch(error){statusKey='error';button.disabled=false;}
+ finally{clearTimeout(timeout);busy=false;update();}
+});
+update();
+})();
