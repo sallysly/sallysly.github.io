@@ -31,7 +31,18 @@ function update(){
  document.getElementById('stage-field').hidden=full;
  total.textContent=(full?100:50)+' CHF';
  form.querySelector('button[type=submit]').textContent=busy?t.sending:t.submit;
- for(const option of form.elements.payment_method.options)if(option.disabled)option.textContent=option.value+' — '+t.pending;
+
+ const method=form.elements.payment_method.value;
+ const label=document.querySelector('[data-r="payment"]');
+ const info=document.querySelector('[data-r="payinfo"]');
+ label.textContent=({fr:'Paiement ',en:'Payment: ',de:'Zahlung: '})[lang()]+method;
+ if(method!=='TWINT')info.textContent=({
+ fr:method==='PayPal'?'Scanne le QR PayPal de Salley Afokossy. Saisis le montant en CHF et indique ton nom et la référence de ton inscription.':'Ouvre le lien Revolut ci-dessous. Saisis le montant en CHF et indique ton nom et la référence de ton inscription.',
+ en:method==='PayPal'?'Scan Salley Afokossy’s PayPal QR. Enter the amount in CHF and include your name and registration reference.':'Open the Revolut link below. Enter the amount in CHF and include your name and registration reference.',
+ de:method==='PayPal'?'Scanne den PayPal-QR von Salley Afokossy. Gib den Betrag in CHF, deinen Namen und die Anmeldereferenz an.':'Öffne den Revolut-Link. Gib den Betrag in CHF, deinen Namen und die Anmeldereferenz an.'
+ })[lang()];
+ document.getElementById('revolut-payment-link').hidden=method!=='Revolut';
+ document.getElementById('paypal-payment-qr').hidden=method!=='PayPal';
  if(statusKey)status.textContent=t[statusKey];
 }
 document.getElementById('cards').addEventListener('click',event=>{
