@@ -8,7 +8,7 @@ Object.assign(translations.de,{"twintInfo":"TWINT: +41 79 814 67 00","twintPrice
 Object.assign(translations.en,{sponsorThanks:"THANK YOU FOR YOUR SUPPORT",sponsorTitle:"Sponsors and partners",organizerLabel:"ORGANISER"});Object.assign(translations.de,{sponsorThanks:"VIELEN DANK FÜR EURE UNTERSTÜTZUNG",sponsorTitle:"Sponsoren und Partner",organizerLabel:"ORGANISATION"});
 let language='fr';const video=document.getElementById('cover'),toggle=document.getElementById('video-toggle');
 function videoLabel(){toggle.textContent=({fr:['Lire la vidéo','Mettre la vidéo en pause'],en:['Play video','Pause video'],de:['Video abspielen','Video pausieren']})[language][video.paused?0:1];toggle.setAttribute('aria-pressed',String(!video.paused));}
-function render(lang){language=lang;document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(el=>{if(translations[lang][el.dataset.i])el.textContent=translations[lang][el.dataset.i];});document.getElementById('cards').innerHTML=artists.map((a,i)=>{const country=lang==='fr'?a[1]:i===0?(lang==='en'?'South Korea':'Südkorea'):i===1?'USA':lang==='de'?'Frankreich':'France';return `<article class="artist"><div class="portrait"><img src="assets/kartel/${a[2]}" alt="${a[0]}" loading="lazy"><span class="number">0${i+1} / WORKSHOP</span></div><p class="country">${country.toUpperCase()}</p><h3>${a[0]}</h3><p class="style">${a[3]}</p><p class="time">${a[4]==='À confirmer'?(lang==='en'?'Time to be confirmed':lang==='de'?'Uhrzeit folgt':'Horaire à confirmer'):a[4]}<span>1h30</span></p><details><summary>${lang==='en'?'Biography':lang==='de'?'Biografie':'Biographie'}</summary><p>${lang==='fr'?a[5]:bios[lang][i]}</p></details></article>`;}).join('');videoLabel();}
+function render(lang){language=lang;document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(el=>{if(translations[lang][el.dataset.i])el.textContent=translations[lang][el.dataset.i];});document.getElementById('cards').innerHTML=artists.map((a,i)=>{const country=lang==='fr'?a[1]:i===0?(lang==='en'?'South Korea':'Südkorea'):i===1?'USA':lang==='de'?'Frankreich':'France';return `<article class="artist"><div class="portrait"><img src="assets/kartel/${a[2]}" alt="${a[0]}" loading="lazy"><span class="number">0${i+1} / WORKSHOP</span></div><a class="button workshop-register" href="#inscriptions" data-workshop="${i}" aria-label="${lang==='en'?'Register for':lang==='de'?'Anmelden für':'S’inscrire au stage de'} ${a[0]}">${lang==='en'?'Register':lang==='de'?'Anmelden':'S’inscrire'} · 50 CHF ↗</a><p class="workshop-pass">${lang==='en'?'All four workshops: CHF 100':lang==='de'?'Alle vier Workshops: CHF 100':'Les quatre stages : 100 CHF'}</p><p class="country">${country.toUpperCase()}</p><h3>${a[0]}</h3><p class="style">${a[3]}</p><p class="time">${a[4]==='À confirmer'?(lang==='en'?'Time to be confirmed':lang==='de'?'Uhrzeit folgt':'Horaire à confirmer'):a[4]}<span>1h30</span></p><details><summary>${lang==='en'?'Biography':lang==='de'?'Biografie':'Biographie'}</summary><p>${lang==='fr'?a[5]:bios[lang][i]}</p></details></article>`;}).join('');videoLabel();}
 document.getElementById('language').addEventListener('change',e=>render(e.target.value));toggle.addEventListener('click',()=>{if(video.paused)video.play().catch(videoLabel);else video.pause();});video.addEventListener('play',videoLabel);video.addEventListener('pause',videoLabel);if(matchMedia('(prefers-reduced-motion: reduce)').matches){video.autoplay=false;video.pause();}render('fr');
 
 
@@ -34,6 +34,15 @@ function update(){
  for(const option of form.elements.payment_method.options)if(option.disabled)option.textContent=option.value+' — '+t.pending;
  if(statusKey)status.textContent=t[statusKey];
 }
+document.getElementById('cards').addEventListener('click',event=>{
+ const link=event.target.closest('[data-workshop]');
+ if(!link||busy||sent)return;
+ const index=Number(link.dataset.workshop);
+ if(!Number.isInteger(index)||!stage.options[index])return;
+ form.elements.formula.value='single';
+ stage.selectedIndex=index;
+ update();
+});
 form.addEventListener('change',update);
 selector.addEventListener('change',update);
 form.addEventListener('submit',async e=>{
