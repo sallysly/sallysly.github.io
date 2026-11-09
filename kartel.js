@@ -145,3 +145,37 @@ document.getElementById('ticket-payment').hidden=false;
 finally{clearTimeout(timeout);busy=false;refresh();}
 });
 })();
+;(()=>{
+const texts={"fr":{"eyebrow":"DIMANCHE 28 FÉVRIER 2027 · B CLUB GENÈVE","title":"Inscription battle · 0 CHF","intro":"Inscris-toi gratuitement dans ta catégorie. Présélections à 11h. Super Kidz : 17 ans maximum inclus.","name":"Nom et prénom","danceName":"Nom de danseur / danseuse (facultatif)","email":"Adresse e-mail","category":"Catégorie","choose":"Choisir une catégorie","age":"Âge au 28 février 2027 (17 ans maximum)","price":"Inscription gratuite : 0 CHF","access":"Si tu ne passes pas les présélections, une entrée public est nécessaire pour rester : 20 CHF en ligne ou 25 CHF sur place.","consent":"J’accepte la transmission de mes coordonnées et de ma catégorie à l’Association Esprit du Cercle via Formspree pour gérer mon inscription au battle.","submit":"M’inscrire au battle — 0 CHF","nav":"Inscription battle · 0 CHF","cta":"Inscription battle · 0 CHF ↗","sending":"Envoi en cours…","success":"Ton inscription gratuite au battle a été transmise à l’organisation. Aucun paiement n’est demandé pour participer. Référence :","error":"Impossible de confirmer l’envoi. Vérifie ta connexion et réessaie. Référence :"},"en":{"eyebrow":"SUNDAY 28 FEBRUARY 2027 · B CLUB GENEVA","title":"Battle registration · CHF 0","intro":"Register for free in your category. Preselections at 11am. Super Kidz: ages 17 and under.","name":"Full name","danceName":"Dance name (optional)","email":"Email address","category":"Category","choose":"Choose a category","age":"Age on 28 February 2027 (17 maximum)","price":"Free registration: CHF 0","access":"If you do not qualify in the preselections, you need a spectator ticket to stay: CHF 20 online or CHF 25 at the door.","consent":"I agree to send my contact details and category to Association Esprit du Cercle via Formspree to manage my battle registration.","submit":"Register for the battle — CHF 0","nav":"Battle registration · CHF 0","cta":"Battle registration · CHF 0 ↗","sending":"Sending…","success":"Your free battle registration has been sent to the organiser. No payment is required to participate. Reference:","error":"We could not confirm submission. Check your connection and try again. Reference:"},"de":{"eyebrow":"SONNTAG, 28. FEBRUAR 2027 · B CLUB GENF","title":"Battle-Anmeldung · CHF 0","intro":"Melde dich kostenlos für deine Kategorie an. Vorauswahl um 11 Uhr. Super Kidz: bis einschließlich 17 Jahre.","name":"Vor- und Nachname","danceName":"Tanzname (optional)","email":"E-Mail-Adresse","category":"Kategorie","choose":"Kategorie auswählen","age":"Alter am 28. Februar 2027 (maximal 17 Jahre)","price":"Kostenlose Anmeldung: CHF 0","access":"Wer sich in der Vorauswahl nicht qualifiziert, benötigt ein Publikumsticket, um zu bleiben: CHF 20 online oder CHF 25 vor Ort.","consent":"Ich stimme der Übermittlung meiner Kontaktdaten und Kategorie über Formspree an die Association Esprit du Cercle zur Bearbeitung meiner Battle-Anmeldung zu.","submit":"Zum Battle anmelden — CHF 0","nav":"Battle-Anmeldung · CHF 0","cta":"Battle-Anmeldung · CHF 0 ↗","sending":"Wird gesendet…","success":"Deine kostenlose Battle-Anmeldung wurde an die Organisation übermittelt. Für die Teilnahme ist keine Zahlung erforderlich. Referenz:","error":"Die Übermittlung konnte nicht bestätigt werden. Prüfe deine Verbindung und versuche es erneut. Referenz:"},"it":{"eyebrow":"DOMENICA 28 FEBBRAIO 2027 · B CLUB GINEVRA","title":"Iscrizione battle · 0 CHF","intro":"Iscriviti gratuitamente nella tua categoria. Preselezioni alle 11:00. Super Kidz: fino a 17 anni inclusi.","name":"Nome e cognome","danceName":"Nome d’arte (facoltativo)","email":"Indirizzo e-mail","category":"Categoria","choose":"Scegli una categoria","age":"Età al 28 febbraio 2027 (massimo 17 anni)","price":"Iscrizione gratuita: 0 CHF","access":"Chi non supera le preselezioni deve acquistare un ingresso per rimanere tra il pubblico: 20 CHF online o 25 CHF sul posto.","consent":"Acconsento alla trasmissione dei miei dati di contatto e della categoria all’Association Esprit du Cercle tramite Formspree per gestire la mia iscrizione al battle.","submit":"Iscriviti al battle — 0 CHF","nav":"Iscrizione battle · 0 CHF","cta":"Iscrizione battle · 0 CHF ↗","sending":"Invio in corso…","success":"La tua iscrizione gratuita al battle è stata inviata all’organizzazione. Non è richiesto alcun pagamento per partecipare. Riferimento:","error":"Impossibile confermare l’invio. Controlla la connessione e riprova. Riferimento:"}};
+const form=document.getElementById('battle-registration-form');
+if(!form)return;
+const selector=document.getElementById('language'),category=document.getElementById('battle-category'),age=document.getElementById('battle-age'),ageField=document.getElementById('battle-age-field'),status=document.getElementById('battle-registration-status'),button=form.querySelector('button[type=submit]');
+const reference='BATTLE-'+crypto.randomUUID().slice(0,8).toUpperCase();
+let busy=false,sent=false,statusKey='';
+function refresh(){
+ const t=texts[selector.value]||texts.fr;
+ document.querySelectorAll('[data-b]').forEach(el=>el.textContent=t[el.dataset.b]);
+ const kidz=category.value==='Super Kidz';
+ ageField.hidden=!kidz;age.required=kidz;age.disabled=sent||!kidz;
+ button.textContent=t[busy?'sending':'submit'];
+ if(statusKey)status.textContent=t[statusKey]+' '+reference;
+}
+category.addEventListener('change',refresh);selector.addEventListener('change',refresh);
+form.addEventListener('submit',async event=>{
+ event.preventDefault();
+ if(busy||sent||!form.reportValidity())return;
+ const data=new FormData(form);
+ data.set('reference',reference);data.set('language',selector.value);
+ data.set('amount_chf','0');data.set('payment_status','Free — no payment required');
+ busy=true;statusKey='';status.textContent='';button.disabled=true;refresh();
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);
+ try{
+  const response=await fetch(form.action,{method:'POST',body:data,headers:{Accept:'application/json'},signal:controller.signal});
+  if(!response.ok)throw new Error('Submission rejected');
+  sent=true;statusKey='success';
+  for(const field of form.elements)field.disabled=true;
+ }catch(error){statusKey='error';button.disabled=false;}
+ finally{clearTimeout(timer);busy=false;refresh();}
+});
+refresh();
+})();
